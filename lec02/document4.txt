@@ -1,0 +1,1 @@
+Java programming language is popular for its performance and scalability. It is extensively used in enterprise applications.
