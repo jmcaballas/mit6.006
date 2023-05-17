@@ -33,3 +33,39 @@ random_array = generate_random_array()
 print(random_array)
 print(insertion_sort(random_array))
 print(insertion_sort_key(random_array))
+
+
+def merge(left, right):
+    arr = []
+    i = 0
+    j = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            arr.append(left[i])
+            i += 1
+        else:
+            arr.append(right[j])
+            j += 1
+
+    arr.extend(left[i:])
+    arr.extend(right[j:])
+    return arr
+
+
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left = arr[:mid]
+    right = arr[mid:]
+
+    # Recursive
+    left = merge_sort(left)
+    right = merge_sort(right)
+
+    return merge(left, right)
+
+
+print(merge_sort(random_array))
