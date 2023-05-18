@@ -29,6 +29,7 @@ class Node:
                 return
 
             self.left = Node(val)
+            self.left.parent = self
             return
 
         if self.right:
@@ -36,10 +37,11 @@ class Node:
             return
 
         self.right = Node(val)
+        self.right.parent = self
 
     def find(self, val):
         if self.key == val:
-            return val
+            return self
 
         if val < self.key:
             return self.left.find(val) if self.left else None
@@ -47,6 +49,21 @@ class Node:
 
     def find_min(self):
         return self.key if not self.left else self.left.find_min()
+
+    def next_larger(self):
+        if self.right:
+            node = self.right
+            while node.left:
+                node = node.left
+            return node
+
+        node = self
+        while node.parent:
+            if node == node.parent.right:
+                node = node.parent
+            else:
+                return node.parent
+        return None
 
 
 bst = Node(None)
@@ -60,8 +77,10 @@ bst.insert(8)
 bst.print_tree()
 
 print("")
-print(bst.find(4))
-print(bst.find(1))
-print(bst.find(9))
-print(bst.find(8))
+print(bst.find(4).key if bst.find(4) else None)
+print(bst.find(1).key)
+print(bst.find(9).key if bst.find(4) else None)
+print(bst.find(8).key)
 print(bst.find_min())
+print(bst.find(3).next_larger().key)
+print(bst.find(8).next_larger().key if bst.find(8).next_larger() else None)
