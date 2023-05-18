@@ -37,6 +37,14 @@ class Node:
 
         self.right = Node(val)
 
+    def find(self, val):
+        if self.key == val:
+            return val
+
+        if val < self.key:
+            return self.left.find(val) if self.left else None
+        return self.right.find(val) if self.right else None
+
 
 bst = Node(None)
 bst.insert(5)
@@ -47,3 +55,9 @@ bst.insert(3)
 bst.insert(6)
 bst.insert(8)
 bst.print_tree()
+
+print("")
+print(bst.find(4))
+print(bst.find(1))
+print(bst.find(9))
+print(bst.find(8))
