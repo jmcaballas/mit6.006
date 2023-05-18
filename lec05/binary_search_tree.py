@@ -45,6 +45,9 @@ class Node:
             return self.left.find(val) if self.left else None
         return self.right.find(val) if self.right else None
 
+    def find_min(self):
+        return self.key if not self.left else self.left.find_min()
+
 
 bst = Node(None)
 bst.insert(5)
@@ -61,3 +64,4 @@ print(bst.find(4))
 print(bst.find(1))
 print(bst.find(9))
 print(bst.find(8))
+print(bst.find_min())
